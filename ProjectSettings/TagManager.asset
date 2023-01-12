@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Wing
+  - ground
+  - airplane
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Airplane
+  - Water
+  - UI
+  - ground
+  - Player
+  - Master
+  - Avionics
+  - Flap
+  - fuelSelect
+  - fuelShutoffValve
+  - parkingBreak
+  - Beacon
+  - Throttle
+  - Mixture
+  - fuelPump
+  - Magnetos
+  - hanger
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
