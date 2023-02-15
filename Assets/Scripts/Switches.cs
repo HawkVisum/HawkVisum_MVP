@@ -37,6 +37,7 @@ namespace UltimateXR.UI.UnityInputModule.Utils
             {
                 Vector3 rotationAxis = Vector3.Cross(_buttonLocalUpAxis, Target.InverseTransformVector(Target.position - transform.position).normalized);
                 Target.Rotate(rotationAxis, -_pressedDegrees, Space.Self);
+                _pressedDegrees = -_pressedDegrees;
             }
         }
 
@@ -47,7 +48,7 @@ namespace UltimateXR.UI.UnityInputModule.Utils
         /// <param name="eventData">Input event data</param>
         protected override void OnKeyReleased(UxrControlInput controlInput, PointerEventData eventData)
         {
-            _pressedDegrees = -_pressedDegrees;
+            
         }
 
         #endregion
