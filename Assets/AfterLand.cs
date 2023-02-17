@@ -5,7 +5,7 @@ using UnityEngine;
 public class AfterLand : MonoBehaviour
 {
     [SerializeField]
-    Animator animator;
+    State animator;
     [SerializeField]
     GameObject gameObject;
 
@@ -18,7 +18,7 @@ public class AfterLand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Landed"))
+        if(animator.currentState == animator.states[2])
         {
             gameObject.SetActive(true);
         }

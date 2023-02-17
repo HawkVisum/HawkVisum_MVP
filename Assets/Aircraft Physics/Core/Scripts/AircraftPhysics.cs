@@ -14,7 +14,13 @@ public class AircraftPhysics : MonoBehaviour
     [SerializeField]
     List<ControlSurface> controlSurfaces = null;
     [SerializeField]
-    public float maxSpeed;
+    public AnimationCurve Animationcurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
+    [SerializeField]
+    State animator;
+    [SerializeField]
+    public float LimitmaxSpeed;
+    float maxSpeed;
+
 
     Rigidbody rb;
     float thrustPercent;
@@ -51,6 +57,18 @@ public class AircraftPhysics : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        if (animator.currentState == animator.states[0] || animator.currentState == animator.states[2])
+        {
+            maxSpeed = Animationcurve.Evaluate(thrustPercent);
+        }
+        else 
+            maxSpeed = LimitmaxSpeed;
+
+        Debug.Log(maxSpeed);
     }
 
     private void FixedUpdate()

@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 public class State : MonoBehaviour
 {
     [SerializeField]
-    Animator animator;
+    public string[] states;
     [SerializeField]
     WheelCollider[] wheels;
+
+    public string currentState;
 
 
     bool isGrounded = true;
@@ -17,16 +19,12 @@ public class State : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentState = states[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Crashed"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
 
         bool[] isgrounded = new bool[3];
         bool[] inair = new bool[3];
@@ -47,22 +45,20 @@ public class State : MonoBehaviour
         {
             isGrounded = true;
             inAir = false;
+            currentState = states[2];
         }
         else if (inair[0] && inair[1] && inair[2])
         {
             inAir = true;
             isGrounded = false;
+            currentState = states[1];
         }
         else
         {
             inAir = false;
             isGrounded = false;
+            currentState = states[4];
         }
-
-
-        animator.SetBool("TakeOff", inAir);
-        animator.SetBool("Land", isGrounded);
-
         
 
     }
@@ -72,7 +68,8 @@ public class State : MonoBehaviour
         Debug.Log("collision detected" + collision.gameObject.tag);
         if(collision.gameObject.tag == "airplane")
         {
-            animator.SetBool("Crashed", true);
+            currentState = states[3];
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 

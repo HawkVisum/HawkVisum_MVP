@@ -17,6 +17,6 @@ MonoBehaviour:
   zeroLiftAoA: 0
   stallAngleHigh: 15
   stallAngleLow: -15
-  chord: 2.19
+  chord: 2.56
   flapFraction: 0
   aspectRatio: 0.39
