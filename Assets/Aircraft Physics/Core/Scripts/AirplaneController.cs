@@ -69,11 +69,11 @@ public class AirplaneController : MonoBehaviour
         Vector2 vector2 = UxrAvatar.LocalAvatarInput.GetInput2D(UltimateXR.Core.UxrHandSide.Left , UltimateXR.Devices.UxrInput2D.Joystick);
         yaw = vector2.x * yawControlSensitivity;
 
-        if (thrustPercent > 1 / 27f)
+        if (thrustPercent > 0)
         {
             foreach (WheelCollider wheel in wheels)
             {
-                wheel.motorTorque = 0.0000001f;
+                wheel.motorTorque = 0.0001f;
             }
         }
         wheels[0].steerAngle = vector2.x * wheelTurn;
@@ -95,10 +95,12 @@ public class AirplaneController : MonoBehaviour
 
     public void Brake(bool isBraking) //increases drag on wheels
     {
-
-        foreach (WheelCollider wheel in wheels)
+        if (isBraking)
         {
-            wheel.brakeTorque = friction;
+            foreach (WheelCollider wheel in wheels)
+            {
+                wheel.brakeTorque = friction;
+            }
         }
     }
 }
