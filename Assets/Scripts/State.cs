@@ -9,12 +9,26 @@ public class State : MonoBehaviour
     public string[] states;
     [SerializeField]
     WheelCollider[] wheels;
+    [SerializeField]
+    GameObject gameobject;
+
+    Transform initialTransform;
+
+    private float simTime;
+    public float takeoffdistance = 0f;
+    public float maxHeight;
+
+
+    public bool Stopwatch = false;
 
     public string currentState;
 
+    public bool takingOff = false;
+    public bool landing = false;
 
-    bool isGrounded = true;
-    bool inAir = false;
+    
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -41,36 +55,66 @@ public class State : MonoBehaviour
             }
             i++;
         }
-        if (isgrounded[0] && isgrounded[1] && isgrounded[2])
+        if (isgrounded[0] || isgrounded[1] || isgrounded[2])
         {
-            isGrounded = true;
-            inAir = false;
             currentState = states[2];
         }
         else if (inair[0] && inair[1] && inair[2])
         {
-            inAir = true;
-            isGrounded = false;
             currentState = states[1];
-        }
-        else
-        {
-            inAir = false;
-            isGrounded = false;
-            currentState = states[4];
+            if(takeoffdistance == 0f)
+                takeoffdistance = CalDistance();
         }
         
+
+        if (Stopwatch)
+        {
+            simTime += Time.deltaTime;
+        }
+        
+
+
 
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("collision detected" + collision.gameObject.tag);
-        if(collision.gameObject.tag == "airplane")
+        float forceOfImpact = collision.relativeVelocity.magnitude;
+        if(forceOfImpact >= 50)
         {
+            Stopwatch = false;
             currentState = states[3];
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
+    }
+
+    private float CalDistance()
+    {
+        float distance = 0f;
+        distance = Vector3.Magnitude(gameobject.transform.position - initialTransform.position);
+        return distance;
+    }
+
+
+    public float getSimTime()
+    {
+        return simTime;
+    }
+
+    public void ignition()
+    {
+        Stopwatch = true;
+    }
+    public void takingoff()
+    {
+        initialTransform = gameobject.transform;
+    }
+
+
+    public void Stop()
+    {
+        Stopwatch = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }

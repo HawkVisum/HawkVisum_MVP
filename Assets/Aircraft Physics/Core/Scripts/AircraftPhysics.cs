@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -65,10 +64,8 @@ public class AircraftPhysics : MonoBehaviour
         {
             maxSpeed = Animationcurve.Evaluate(thrustPercent);
         }
-        else 
+        else
             maxSpeed = LimitmaxSpeed;
-
-        Debug.Log(maxSpeed);
     }
 
     private void FixedUpdate()

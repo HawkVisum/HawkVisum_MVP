@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Emmision : MonoBehaviour
 {
-    Renderer renderer;
+    Renderer _renderer;
     Material material;
     bool blinkon = false;
     bool on = false;
@@ -12,7 +12,7 @@ public class Emmision : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        _renderer = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -21,15 +21,15 @@ public class Emmision : MonoBehaviour
         if (blinkon)
         {
             float emmision = Mathf.PingPong(Time.time, 20);
-            renderer.material.SetColor("_EmmisionColor", new Color(1f, 1f, 1f) * emmision);
+            _renderer.material.SetColor("_EmmisionColor", new Color(1f, 1f, 1f) * emmision);
         }
         else if (on)
         {
-            renderer.material.SetColor("_EmmisionColor", new Color(1f, 1f, 1f) * 20);
+            _renderer.material.SetColor("_EmmisionColor", new Color(1f, 1f, 1f) * 20);
         }
         else
         {
-            renderer.material.SetColor("_EmmisionColor", new Color(1f, 1f, 1f) * 0);
+            _renderer.material.SetColor("_EmmisionColor", new Color(1f, 1f, 1f) * 0);
         }
         
     }

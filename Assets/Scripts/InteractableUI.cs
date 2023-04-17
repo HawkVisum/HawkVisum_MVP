@@ -10,7 +10,7 @@ public class InteractableUI : MonoBehaviour
     [SerializeField]
     GameObject Interactabelobject;
     [SerializeField]
-    GameObject gameObject;
+    GameObject gameobject;
     Vector3 initalposition;
     Quaternion initialRotation;
     
@@ -21,12 +21,13 @@ public class InteractableUI : MonoBehaviour
         initalposition = Interactabelobject.transform.localPosition;
         initialRotation = Interactabelobject.transform.localRotation;
         toggle.interactable = false;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.activeInHierarchy)
+        if (gameobject.activeInHierarchy)
         {
             if (Interactabelobject.transform.localPosition != initalposition || Interactabelobject.transform.localRotation != initialRotation)
             {

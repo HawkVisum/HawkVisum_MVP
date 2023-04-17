@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Oculus.Interaction.Input;
@@ -13,10 +12,6 @@ public class AirplaneController : MonoBehaviour
     [SerializeField]
     float pitchControlSensitivity = 0.2f;
     public float yawControlSensitivity = 0.2f;
-    [SerializeField]
-    float thrustControlSensitivity = 0.01f;
-    [SerializeField]
-    float flapControlSensitivity = 0.15f;
     [SerializeField]
     Throttle _throttle;
     [SerializeField]

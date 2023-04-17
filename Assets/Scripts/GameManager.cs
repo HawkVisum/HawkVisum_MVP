@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +14,8 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("instance created");
         }
         else if (instance != this)
         {
@@ -24,13 +24,14 @@ public class GameManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    public Postanalysis[] PreFlightCheckList = new Postanalysis[11];
-    public Postanalysis[] EngineStartCheckList = new Postanalysis[8];
-    public Postanalysis[] PreTaxiCheckList = new Postanalysis[3];
-    public Postanalysis[] OnRunwayCheckList = new Postanalysis[4];
-    public Postanalysis[] AfterLandingCheckList = new Postanalysis[9];
 
-    private int preFlight = 0, EngineStart = 0, PreTaxi = 0, OnRunway = 0, AfterLanding = 0;
+
+    public List<Postanalysis> PreFlightCheckList = new List<Postanalysis>();
+    public List<Postanalysis> EngineStartCheckList = new List<Postanalysis>();
+    public List<Postanalysis> PreTaxiCheckList = new List<Postanalysis>();
+    public List<Postanalysis> OnRunwayCheckList = new List<Postanalysis>();
+    public List<Postanalysis> AfterLandingCheckList = new List<Postanalysis>();
+
 
     void Start()
     {
@@ -43,31 +44,26 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void PreFlightChecklist (Toggle toggle, TextMeshPro textMeshPro)
+    public void PreFlightChecklist (string name)
     {
-        PreFlightCheckList[preFlight].set(textMeshPro.text, toggle.isOn);
-        preFlight++;
+        PreFlightCheckList.Add(new Postanalysis() { text = name, WasTicked = true });
     }
 
-    public void EngineStartChecklist(Toggle toggle, TextMeshPro textMeshPro)
+    public void EngineStartChecklist(string name)
     {
-        EngineStartCheckList[EngineStart].set(textMeshPro.text, toggle.isOn);
-        EngineStart++;
+        EngineStartCheckList.Add(new Postanalysis() { text = name, WasTicked = true });
     }
-    public void PreTaxiChecklist(Toggle toggle, TextMeshPro textMeshPro)
+    public void PreTaxiChecklist(string name)
     {
-        PreTaxiCheckList[PreTaxi].set(textMeshPro.text, toggle.isOn);
-        PreTaxi++;
+        PreTaxiCheckList.Add(new Postanalysis() { text = name, WasTicked = true });
     }
-    public void OnRunwayChecklist(Toggle toggle, TextMeshPro textMeshPro)
+    public void OnRunwayChecklist(string name)
     {
-        OnRunwayCheckList[OnRunway].set(textMeshPro.text, toggle.isOn);
-        OnRunway++;
+        OnRunwayCheckList.Add(new Postanalysis() { text = name, WasTicked = true });
     }
-    public void AfterLandingChecklist(Toggle toggle, TextMeshPro textMeshPro)
+    public void AfterLandingChecklist(string name)
     {
-        AfterLandingCheckList[AfterLanding].set(textMeshPro.text, toggle.isOn);
-        AfterLanding++;
+        AfterLandingCheckList.Add(new Postanalysis() { text = name, WasTicked = true });
     }
 
 }
@@ -82,6 +78,14 @@ public class Postanalysis
     {
         WasTicked = Bool;
         text = String;
+
+        Debug.Log(text);
+    }
+
+    public Postanalysis()
+    {
+        WasTicked = false;
+        text = "";
     }
 
 };

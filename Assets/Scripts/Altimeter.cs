@@ -17,11 +17,22 @@ public class Altimeter : MonoBehaviour
     public float meterstofeet = 3.2808f;
     float sealevelofplane = 3002f;
 
+    public State state;
+
+    private float MaxHeight = 0f;
+
     void Update()
     {
         float height = Aircraft.transform.position.y - Plane.transform.position.y;
         float heightinfeets = height * meterstofeet + sealevelofplane;
         handlehands(heightinfeets);
+
+        if (height > MaxHeight)
+        {
+            MaxHeight = height;
+        }
+
+        state.maxHeight = MaxHeight;
     }
 
     private void handlehands(float height)

@@ -6,6 +6,6 @@ public class Rotator : MonoBehaviour
 
     private void Update()
     {
-        transform.localRotation *= Quaternion.AngleAxis(speed * Time.deltaTime , Vector3.forward);
+        transform.localRotation *= Quaternion.AngleAxis((200+speed) * Time.deltaTime , Vector3.forward);
     }
 }
